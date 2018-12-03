@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Sandbox</title>
+    <script type="text/javascript" language="javascript" src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" language="javascript">
+        //window.alert("here");
+		
+		function getData(objectToSend){
+			var apiKey = "AIzaSyAo7-TKZSWcBYRfKYAlyN68tPYm4Vd5Vh4";
+			var url = "https://texttospeech.googleapis.com/v1/text:synthesize?key=" + apiKey;
+			
+			var ttsResponse = {};
+			$.ajax({
+				async: false,
+				contentType: "application/json",
+				dataType: "json",
+				data: JSON.stringify(objectToSend),
+				url: url, 
+				method: "POST",				
+				success: function(result){
+					ttsResponse = result;
+				},
+				error: function(xhr, status, error) {
+					window.alert(error);
+				}
+			});
+			
+			return ttsResponse.audioContent;
+			
+			var returnValue = "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IOA0Vc/QWHHg0DRUq71Hg0JSwFGHmewkWU86HUfKqHnSRFVMQU1FVVVVTEFNRTMu//NExGsXUP3MAHpMcDk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExGAAAANIAAAAADk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMu//NExKwAAANIAAAAADk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NExKwAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NExKwAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+			//return returnValue;
+		}
+		
+        $(document).ready(function () {
+
+        });
+		
+		function playAudio(){
+            var objectToSend = {};
+            var synthesisInput = {};
+            var voiceSelectionParams = {};
+            var audioConfig = {};
+
+            synthesisInput.text = $(".read-me").text();
+
+            voiceSelectionParams.languageCode = "en-US";
+            //voiceSelectionParams.ssmlGender = "MALE";
+
+            audioConfig.audioEncoding = "MP3";
+            audioConfig.speakingRate = .7;
+
+            objectToSend.input = synthesisInput;
+            objectToSend.voice = voiceSelectionParams;
+            objectToSend.audioConfig = audioConfig;
+			
+			// make request
+			var snd = new Audio("data:audio/mp3;base64," + getData(objectToSend));
+			snd.play();		
+		}
+    </script>
+</head>
+<body>
+    <div class="read-me" aria-live="polite">
+		Come, night, come, Romeo, come, thou day in night,
+		For thou wilt lie upon the wings of night
+		Whiter than new snow on a raven's back.
+		Come, gentle night, come, loving, black-browed night,
+		Give me my Romeo, and, when he shall die,
+		Take him and cut him out in little stars,
+		And he will make the face of heaven so fine
+		That all the world will be in love with night,
+		And pay no worship to the garish sun.
+		Oh, I have bought the mansion of love,
+		But not possessed it, and though I am sold,
+		Not yet enjoyed.
+    </div>
+	<input type="button" onclick="playAudio();" value="|>"></input>
+</body>
+</html>
